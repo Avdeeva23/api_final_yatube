@@ -3,7 +3,7 @@ from rest_framework.validators import UniqueTogetherValidator
 
 from posts.models import Comment, Follow, Group, Post, User
 
-from .serializers import SlugRelatedField
+from rest_framework.serializers import SlugRelatedField
 
 
 class PostSerializer(serializers.ModelSerializer):
