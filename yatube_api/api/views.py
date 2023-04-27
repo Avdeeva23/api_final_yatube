@@ -24,14 +24,14 @@ class FollowViewSet(mixins.CreateModelMixin,
     search_fields = ('following__username',)
 
     def get_queryset(self):
-        return self.request.user.follower.all()
+        return self.request.user.follower.select_related('user')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
+    queryset = Post.objects.select_related('author')
     serializer_class = PostSerializer
     permission_classes = (AuthorPermission,
                           permissions.IsAuthenticatedOrReadOnly,)
